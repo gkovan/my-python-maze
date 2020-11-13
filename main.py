@@ -90,7 +90,7 @@ class App:
         pygame.init()
         self._display_surf = pygame.display.set_mode((self.windowWidth, self.windowHeight), pygame.HWSURFACE)
 
-        pygame.display.set_caption('Pygame pythonspot.com example')
+        pygame.display.set_caption('Michaelas awesome maze')
         self._running = True
         self._coin_surf = pygame.image.load("coin.jpg")
         self._player_surf = pygame.image.load("player.png")
