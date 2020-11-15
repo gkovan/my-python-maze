@@ -35,7 +35,7 @@ class Maze:
                      1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ]
 
-    def draw(self, display_surf, image_surf, coin_surf, player_surf, player):
+    def draw(self, display_surf, image_surf, coin_surf, player_surf, player, question_text):
 
         # check for collision with the wall
         if self.maze[player.x + (player.y*self.M)] == 1:
@@ -67,10 +67,25 @@ class Maze:
                 bx = 0
                 by = by + 1
 
-        pygame.font.init()
         myfont = pygame.font.SysFont('Comic Sans MS', 30)
-        _text_surf = myfont.render('Some Text', False, (255, 255, 255))
-        display_surf.blit(_text_surf, (0, 600))
+        _question_surf = myfont.render(question_text._question1[0], False, (255, 255, 255))
+        display_surf.blit(_question_surf, (0, 400))
+        _multiple_choice_a_surf = myfont.render(question_text._question1[1], False, (255, 255, 255))
+        display_surf.blit(_multiple_choice_a_surf, (0, 450))
+        _multiple_choice_b_surf = myfont.render(question_text._question1[2], False, (255, 255, 255))
+        display_surf.blit(_multiple_choice_b_surf, (0, 500))
+        _multiple_choice_c_surf = myfont.render(question_text._question1[3], False, (255, 255, 255))
+        display_surf.blit(_multiple_choice_c_surf, (0, 550))
+        _multiple_choice_d_surf = myfont.render(question_text._question1[4], False, (255, 255, 255))
+        display_surf.blit(_multiple_choice_a_surf, (0, 600))
+
+
+class QuestionText:
+    _question1 = ['What is your name?', 'a) Daniel', 'b) Eliana', 'c) Michaela', 'd) David']
+    _question2 = ['How old are you?', '16', '14', '12', '9']
+    question1 = 'What is your name?\n a) Daniel b) Eliana c) Michaela d) David'
+
+
 
 
 class App:
@@ -87,8 +102,10 @@ class App:
         self._display_surf = None
         self._image_surf = None
         self._block_surf = None
+        self._question_surf = None
         self.player = Player()
         self.maze = Maze()
+        self.question_text = QuestionText()
 
     def on_init(self):
         pygame.init()
@@ -100,6 +117,9 @@ class App:
         self._player_surf = pygame.image.load("player.png")
         self._block_surf = pygame.image.load("block.png").convert()
 
+        pygame.font.init()
+
+
     def on_event(self, event):
         if event.type == QUIT:
             self._running = False
@@ -110,7 +130,7 @@ class App:
     def on_render(self):
         self._display_surf.fill((0, 0, 0))
         #self._display_surf.blit(self._player_surf, (self.player.x, self.player.y))
-        self.maze.draw(self._display_surf, self._block_surf, self._coin_surf, self._player_surf, self.player)
+        self.maze.draw(self._display_surf, self._block_surf, self._coin_surf, self._player_surf, self.player, self.question_text)
         pygame.display.flip()
 
     def on_cleanup(self):
