@@ -99,8 +99,6 @@ class App:
         self._coin_surf = pygame.image.load("coin.jpg")
         self._player_surf = pygame.image.load("player.png")
         self._block_surf = pygame.image.load("block.png").convert()
-        print("GKGKGK")
-        print(self._player_surf.get_rect())
 
     def on_event(self, event):
         if event.type == QUIT:
@@ -141,20 +139,6 @@ class App:
                     if event.key == pygame.K_UP:
                         self.player.moveUp()
 
-#            if (keys[K_RIGHT] and self.K_RIGHT_PRESSED == 0):
-#                self.player.moveRight()
-
-#            if (keys[K_LEFT]):
-#                self.player.moveLeft()
-
-#            if (keys[K_UP]):
-#                self.player.moveUp()
-
-#            if (keys[K_DOWN]):
-#                self.player.moveDown()
-
-#            if (keys[K_ESCAPE]):
-#                self._running = False
 
             self.on_loop()
             self.on_render()
