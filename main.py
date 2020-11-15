@@ -6,8 +6,8 @@ class Player:
     prev_x = 1
     prev_y = 1
 
-    x = 1
-    y = 1
+    x = 2
+    y = 2
     speed = 1
 
     def moveRight(self):
@@ -21,7 +21,6 @@ class Player:
 
     def moveDown(self):
         self.y = self.y + 1
-
 
 class Maze:
     def __init__(self):
@@ -67,6 +66,11 @@ class Maze:
             if bx > self.M - 1:
                 bx = 0
                 by = by + 1
+
+        pygame.font.init()
+        myfont = pygame.font.SysFont('Comic Sans MS', 30)
+        _text_surf = myfont.render('Some Text', False, (255, 255, 255))
+        display_surf.blit(_text_surf, (0, 600))
 
 
 class App:
