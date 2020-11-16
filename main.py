@@ -36,6 +36,21 @@ class Maze:
                      1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ]
 
+    def drawQuestion(self, display_surf, question):
+
+        myfont = pygame.font.SysFont('Comic Sans MS', 30)
+        _question_surf = myfont.render(question[0], False, (255, 255, 255))
+        display_surf.blit(_question_surf, (0, 400))
+        _multiple_choice_a_surf = myfont.render(question[1], False, (255, 255, 255))
+        display_surf.blit(_multiple_choice_a_surf, (0, 450))
+        _multiple_choice_b_surf = myfont.render(question[2], False, (255, 255, 255))
+        display_surf.blit(_multiple_choice_b_surf, (0, 500))
+        _multiple_choice_c_surf = myfont.render(question[3], False, (255, 255, 255))
+        display_surf.blit(_multiple_choice_c_surf, (0, 550))
+        _multiple_choice_d_surf = myfont.render(question[4], False, (255, 255, 255))
+        display_surf.blit(_multiple_choice_a_surf, (0, 600))
+
+
     def draw(self, display_surf, image_surf, coin_surf, player_surf, player, questions):
 
         # check for collision with the wall
@@ -48,9 +63,14 @@ class Maze:
             player.prev_x = player.x
             player.prev_y = player.y
 
+        need_answer = False
         # check for collision with coin
         if self.maze[player.x + (player.y * self.M)] == 2:
             print("COLLISION")
+            need_answer = True
+            random_number = random.randint(1, 3)
+            question = questions.questionsHashMap[random_number]
+            self.drawQuestion(display_surf, question)
             self.maze[player.x + (player.y * self.M)] = 0
 
         display_surf.blit(player_surf, (player.x * 44, player.y * 44))
@@ -68,19 +88,37 @@ class Maze:
                 bx = 0
                 by = by + 1
 
-        randomNumber = random.randint(1, 3)
-        question = questions.questionsHashMap[randomNumber]
-        myfont = pygame.font.SysFont('Comic Sans MS', 30)
-        _question_surf = myfont.render(question[0], False, (255, 255, 255))
-        display_surf.blit(_question_surf, (0, 400))
-        _multiple_choice_a_surf = myfont.render(question[1], False, (255, 255, 255))
-        display_surf.blit(_multiple_choice_a_surf, (0, 450))
-        _multiple_choice_b_surf = myfont.render(question[2], False, (255, 255, 255))
-        display_surf.blit(_multiple_choice_b_surf, (0, 500))
-        _multiple_choice_c_surf = myfont.render(question[3], False, (255, 255, 255))
-        display_surf.blit(_multiple_choice_c_surf, (0, 550))
-        _multiple_choice_d_surf = myfont.render(question[4], False, (255, 255, 255))
-        display_surf.blit(_multiple_choice_a_surf, (0, 600))
+        pygame.display.flip()
+
+        if need_answer:
+            need_answer = False
+            correct_answer = question[5];
+            print("The correct answer is: " + correct_answer)
+            user_answer = 'z'
+            correct = False
+            while not correct:
+                events = pygame.event.get()
+                for event in events:
+                    print(event)
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_a:
+                            user_answer = 'a'
+                            print("pressed a")
+                        if event.key == pygame.K_b:
+                            user_answer = 'b'
+                        if event.key == pygame.K_c:
+                            user_answer = 'c'
+                        if event.key == pygame.K_d:
+                            user_answer = 'd'
+
+                        print("User answer is: " + user_answer)
+
+                if user_answer == correct_answer:
+                    correct = True
+                    print ("HOORAAY. You got the correct answer.")
+                    break
+
+
 
 
 class Questions:
@@ -137,7 +175,6 @@ class App:
     def on_render(self):
         self._display_surf.fill((0, 0, 0))
         self.maze.draw(self._display_surf, self._block_surf, self._coin_surf, self._player_surf, self.player, self.questions)
-        pygame.display.flip()
 
     def on_cleanup(self):
         pygame.quit()
