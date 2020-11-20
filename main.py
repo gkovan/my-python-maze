@@ -148,10 +148,26 @@ class Questions:
     question7 = ['Who says that money is not the only thing that separates the Greasers from the Socs?' , 'a) Ponyboy' , 'b) Randy' , 'c) Cherry' , 'd) Marcia' , 'c']
     question8 = ['What does Ponyboy visualize as a fantasy life?' , 'a) life in the country' , 'b) no gangs' , 'c) Parents still alive' 'd) all of the above' 'd']
     question9 = ['Why does Ponyboy run out of the house at 2 am?' , 'a) Because Darry slapped him and yelled at him for getting home so late' , 'b) to meet up with Cherry' , 'c) to fight with Bob' , 'd) to fo to a club' , 'a']
+    question10 = ['Why did Johnny stab Bob?' , 'a) Bob was trying to drown a Ponyboy with some of the other Socs ' , 'b) Johnny didnt like Bob' , 'c) Bob was about to kill Johnny' , 'd) Bob was about stab two-bit' , 'a']
+    question11 = ['How did Johnny and Ponyboy get to Windrixville?' , 'a) car' , 'b) train' , 'c) plane' , 'd) by foot' , 'b']
+    question12 = ['Where did Ponyboy and Johnny hide in windrixville?' , 'a) in a car' , 'b) in a cafe' , 'c) in an abandoned church' , 'd) on the streets' , 'c']
+    question13 = ['What book do Johnny and Ponyboy read while hiding in the abandoned church?' , 'a) Gone With the Wind' , 'b) Angels and Demons' , 'c) Gone With the Rain' , 'd) Gone With the Time' , 'a']
+    question14 = ['What does dally do to scare off the socs?' , 'a) carries an unloaded gun' , 'b) gets fake vampire teeth' , 'c) carries a knife' , 'd) wears chains' , 'a']
+    question15 = ['Who is a spy for the greasers now?' , 'a) cherry' , 'b) Bob' , 'c) Randy' , 'd) Marcia' , 'a']
+    question16 = ['What is Ponyboys biggest fear?' , 'a) dying' , 'b) running away from home' , 'c) killing someone' , 'd) being put in a boys home' , 'd']
+    question17 = ['What sport does Pony participate in?' , 'a) basketball' , 'b) football' , 'c) track' , 'd) soccer' , 'c']
+    question18 = ['True or false: Dally is relieved that he won’t be in the rumble.' , 'a) true' , 'b) False' , 'c) neither' , 'd) both' , 'b']
+    question19 = ['What does Johnny ask Two-Bit to bring him?' , 'a) a switchblade' , 'b) a copy of Gone With the Wind' , 'c) His mothers necklace' , 'd) a cigarette' , 'b']
+    question20 = ['When Johnnys mother came to visit him at the hospital, what was Johnnys reaction?' , 'a) he was happy to see her' , 'b) he was sleeping' , 'c) he wished his father had come instead' , 'd) he didnt want to see her' , 'd']
+    question21 = ['Who was the youngest one at the rumble?' , 'a) Ponyboy' , 'b) ' , 'c) ' , 'd) ' , '']
+    question22 = ['Who won the rumble?' , 'a) ' , 'b) ' , 'c) ' , 'd) ' , '']
+    question23 = ['Why did dally and ponyboy go to the hospital after the fight?' , 'a) ' , 'b) ' , 'c) ' , 'd) ' , '']
+    question24 = ['What news does Pony tell the guys?' , 'a) ' , 'b) ' , 'c) ' , 'd) ' , '']
+    question25 = ['How did Dally deal with the death of Johnny?' , 'a) ' , 'b) ' , 'c) ' , 'd) ' , '']
+    question26 = ['']
+    question27 = ['']
 
-
-
-    questionsHashMap = {}
+questionsHashMap = {}
     questionsHashMap[1] = question1
     questionsHashMap[2] = question2
     questionsHashMap[3] = question3
