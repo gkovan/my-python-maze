@@ -11,6 +11,9 @@ class Player:
     y = 2
     speed = 1
 
+    score = 0
+
+
     def moveRight(self):
         self.x = self.x + 1
 
@@ -28,24 +31,24 @@ class Maze:
         self.M = 20
         self.N = 20
         self.maze = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                     1, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+                     1, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 1, 1, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1,
-                     1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
+                     1, 1, 1, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
+                     1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 2, 1, 1,
                      1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1,
-                     1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1,
-                     1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1,
+                     1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 1, 1,
+                     1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1,
-                     1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1,
-                     1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
+                     1, 1, 1, 0, 0, 2, 0, 0, 2, 1, 1, 1, 0, 0, 2, 0, 0, 2, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1,
+                     1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1,
-                     1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1,
-                     1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-                     1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                     1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 2, 0, 0, 0, 0, 2, 1, 1,
+                     1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                      1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                     1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                     1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
     def drawQuestion(self, display_surf, question):
@@ -102,6 +105,12 @@ class Maze:
                 bx = 0
                 by = by + 1
 
+        font_for_score = pygame.font.SysFont('Comic Sans MS', 30)
+        score_label_surf = font_for_score.render('Score', False, (255, 255, 255))
+        score_surf = font_for_score.render(str(player.score), False, (255, 255, 255))
+        display_surf.blit(score_label_surf, (1000, 0))
+        display_surf.blit(score_surf, (1000, 50))
+
         pygame.display.flip()
 
         if need_answer:
@@ -130,6 +139,7 @@ class Maze:
                 if user_answer == correct_answer:
                     correct = True
                     print ("HOORAAY. You got the correct answer.")
+                    player.score = player.score + 100
                     break
 
 
@@ -144,9 +154,9 @@ class Questions:
     question3 = ['Who was Ponyboy\'s oldest brother?' , 'a) Soda Pop' , 'b) Dally', 'c) Johnny' , 'd) Darry' , 'd']
     question4 = ['Who does Cherry say she could fall in love with?' , 'a) Ponyboy' , 'b) Dally' , 'c)darry' , 'd) Johnny' , 'b']
     question5 = ['How did Johnny change after getting jumped by the Socs?' , 'a) He carries a 6-inch switchblade with him everywhere' , 'b)  he scares more easily' , 'c) he never walks alone' , 'd) all of the above' , 'd']
-    question6 = ['What do Cherry and Ponyboy both watch?' , 'a) sunsets' , 'b) video games' , 'c) star wars' , 'the NBA' 'a']
+    question6 = ['What do Cherry and Ponyboy both watch?' , 'a) sunsets' , 'b) video games' , 'c) star wars' , 'the NBA' , 'a']
     question7 = ['Who says that money is not the only thing that separates the Greasers from the Socs?' , 'a) Ponyboy' , 'b) Randy' , 'c) Cherry' , 'd) Marcia' , 'c']
-    question8 = ['What does Ponyboy visualize as a fantasy life?' , 'a) life in the country' , 'b) no gangs' , 'c) Parents still alive' 'd) all of the above' 'd']
+    question8 = ['What does Ponyboy visualize as a fantasy life?' , 'a) life in the country' , 'b) no gangs' , 'c) Parents still alive' , 'd) all of the above' , 'd']
     question9 = ['Why does Ponyboy run out of the house at 2 am?' , 'a) Because Darry slapped him and yelled at him for getting home so late' , 'b) to meet up with Cherry' , 'c) to fight with Bob' , 'd) to fo to a club' , 'a']
     question10 = ['Why did Johnny stab Bob?' , 'a) Bob was trying to drown a Ponyboy with some of the other Socs ' , 'b) Johnny didnt like Bob' , 'c) Bob was about to kill Johnny' , 'd) Bob was about stab two-bit' , 'a']
     question11 = ['How did Johnny and Ponyboy get to Windrixville?' , 'a) car' , 'b) train' , 'c) plane' , 'd) by foot' , 'b']
@@ -159,15 +169,13 @@ class Questions:
     question18 = ['True or false: Dally is relieved that he won’t be in the rumble.' , 'a) true' , 'b) False' , 'c) neither' , 'd) both' , 'b']
     question19 = ['What does Johnny ask Two-Bit to bring him?' , 'a) a switchblade' , 'b) a copy of Gone With the Wind' , 'c) His mothers necklace' , 'd) a cigarette' , 'b']
     question20 = ['When Johnnys mother came to visit him at the hospital, what was Johnnys reaction?' , 'a) he was happy to see her' , 'b) he was sleeping' , 'c) he wished his father had come instead' , 'd) he didnt want to see her' , 'd']
-    question21 = ['Who was the youngest one at the rumble?' , 'a) Ponyboy' , 'b) ' , 'c) ' , 'd) ' , '']
-    question22 = ['Who won the rumble?' , 'a) ' , 'b) ' , 'c) ' , 'd) ' , '']
-    question23 = ['Why did dally and ponyboy go to the hospital after the fight?' , 'a) ' , 'b) ' , 'c) ' , 'd) ' , '']
-    question24 = ['What news does Pony tell the guys?' , 'a) ' , 'b) ' , 'c) ' , 'd) ' , '']
-    question25 = ['How did Dally deal with the death of Johnny?' , 'a) ' , 'b) ' , 'c) ' , 'd) ' , '']
-    question26 = ['']
-    question27 = ['']
+    question21 = ['Who was the youngest one at the rumble?' , 'a) Ponyboy' , 'b) Randy' , 'c) Johnny' , 'd) Soda' , 'a']
+    question22 = ['Who won the rumble?' , 'a) greasers' , 'b) Socs' , 'c) they didnt end up fighting' , 'd) they both ran away' , 'a']
+    question23 = ['Why did dally and ponyboy go to the hospital after the fight?' , 'a) to see Johnny' , 'b) ' , 'c) ' , 'd) ' , '']
+    question24 = ['What news does Pony tell the guys?' , 'a) That Johnny died' , 'b) That Dally was shot' , 'c) That he is going to run away' , 'd) That Darry was killed in the rumble' , 'a']
+    question25 = ['How did Dally deal with the death of Johnny?' , 'a) he robbed a store' , 'b) he ran away' , 'c) he broke down crying' , 'd) he killed Randy' , 'a']
 
-questionsHashMap = {}
+    questionsHashMap = {}
     questionsHashMap[1] = question1
     questionsHashMap[2] = question2
     questionsHashMap[3] = question3
