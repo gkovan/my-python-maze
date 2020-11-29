@@ -139,7 +139,19 @@ class Maze:
                 if user_answer == correct_answer:
                     correct = True
                     print ("HOORAAY. You got the correct answer.")
+
+                    # clear the previous score by drawing it in black
+                    score_surf = font_for_score.render(str(player.score), False, (0, 0, 0))
+                    display_surf.blit(score_surf, (1000, 50))
+
+                    # increment the new score
                     player.score = player.score + 100
+
+                    # display the new score in white
+                    score_surf = font_for_score.render(str(player.score), False, (255, 255, 255))
+                    display_surf.blit(score_surf, (1000, 50))
+
+                    pygame.display.flip()
                     break
 
 
