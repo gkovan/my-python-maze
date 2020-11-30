@@ -83,7 +83,7 @@ class Maze:
         if self.maze[player.x + (player.y * self.M)] == 2:
             print("COLLISION")
             need_answer = True
-            random_number = random.randint(1, 9)
+            random_number = random.randint(1, 27)
             print("The random number is: ")
             print(random_number)
             question = questions.questionsHashMap[random_number]
@@ -186,6 +186,8 @@ class Questions:
     question23 = ['Why did dally and ponyboy go to the hospital after the fight?' , 'a) to see Johnny' , 'b) ' , 'c) ' , 'd) ' , '']
     question24 = ['What news does Pony tell the guys?' , 'a) That Johnny died' , 'b) That Dally was shot' , 'c) That he is going to run away' , 'd) That Darry was killed in the rumble' , 'a']
     question25 = ['How did Dally deal with the death of Johnny?' , 'a) he robbed a store' , 'b) he ran away' , 'c) he broke down crying' , 'd) he killed Randy' , 'a']
+    question26 = ['Who came to visit Ponyboy at his house while he was recovering?', 'a) Bob', 'b) Randy', 'c) Johnny', 'd) Two Bit', 'b']
+    question27 = ['Who speaks to the judge before the hearing begins?', 'a) Ponyboy', 'b) Randy', 'c) Johnny', 'd) Cherry', 'a']
 
     questionsHashMap = {}
     questionsHashMap[1] = question1
@@ -197,6 +199,25 @@ class Questions:
     questionsHashMap[7] = question7
     questionsHashMap[8] = question8
     questionsHashMap[9] = question9
+    questionsHashMap[10] = question10
+    questionsHashMap[11] = question11
+    questionsHashMap[12] = question12
+    questionsHashMap[13] = question13
+    questionsHashMap[14] = question14
+    questionsHashMap[15] = question15
+    questionsHashMap[16] = question16
+    questionsHashMap[17] = question17
+    questionsHashMap[18] = question18
+    questionsHashMap[19] = question19
+    questionsHashMap[20] = question20
+    questionsHashMap[21] = question21
+    questionsHashMap[22] = question22
+    questionsHashMap[23] = question23
+    questionsHashMap[24] = question24
+    questionsHashMap[25] = question25
+    questionsHashMap[26] = question26
+    questionsHashMap[27] = question27
+
 
 
 class App:
@@ -224,7 +245,7 @@ class App:
 
         pygame.display.set_caption('Pygame pythonspot.com example')
         self._running = True
-        self._coin_surf = pygame.image.load("coin.jpg")
+        self._coin_surf = pygame.image.load("coin2.png")
         self._player_surf = pygame.image.load("player.png")
         self._block_surf = pygame.image.load("block.png").convert()
 
