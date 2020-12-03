@@ -35,7 +35,7 @@ class Maze:
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1,
-                     1, 1, 1, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
+                     1, 1, 1, 0, 0, 0, 2, 0, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
                      1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 2, 1, 1,
                      1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1,
                      1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 1, 1,
@@ -45,10 +45,10 @@ class Maze:
                      1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1,
-                     1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 2, 0, 0, 0, 0, 2, 1, 1,
-                     1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                     1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 2, 0, 0, 2, 0, 2, 1, 1,
+                     1, 1, 0, 0, 2, 0, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                      1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                     1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1,
+                     1, 1, 1, 1, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 3, 1,
                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
     def drawQuestion(self, display_surf, question):
@@ -66,7 +66,7 @@ class Maze:
         display_surf.blit(_multiple_choice_d_surf, (0, 1100))
 
 
-    def draw(self, display_surf, image_surf, coin_surf, player_surf, player, questions):
+    def draw(self, sunset_surf, display_surf, image_surf, coin_surf, player_surf, player, questions):
 
         # check for collision with the wall
         if self.maze[player.x + (player.y*self.M)] == 1:
@@ -90,6 +90,12 @@ class Maze:
             self.drawQuestion(display_surf, question)
             self.maze[player.x + (player.y * self.M)] = 0
 
+        if self.maze[player.x + (player.y * self.M)] == 3:
+            status_text = 'Congratulations! You completed the maze!'
+            font_for_status = pygame.font.SysFont('Comic Sans MS', 30)
+            status_surf = font_for_status.render(status_text, False, (255, 255, 255))
+            display_surf.blit(status_surf, (0, 1200))
+
         display_surf.blit(player_surf, (player.x * 44, player.y * 44))
         bx = 0
         by = 0
@@ -99,6 +105,9 @@ class Maze:
 
             if self.maze[bx + (by * self.M)] == 2:
                 display_surf.blit(coin_surf, (bx * 44, by * 44))
+
+            if self.maze[bx + (by * self.M)] == 3:
+                display_surf.blit(sunset_surf, (bx * 44, by * 44))
 
             bx = bx + 1
             if bx > self.M - 1:
@@ -140,6 +149,18 @@ class Maze:
                     correct = True
                     print ("HOORAAY. You got the correct answer.")
 
+                    # To clear this text display in black
+                    status_text = 'Incorrect. Please try again'
+                    font_for_status = pygame.font.SysFont('Comic Sans MS', 30)
+                    status_surf = font_for_status.render(status_text, False, (0, 0, 0))
+                    display_surf.blit(status_surf, (0, 1200))
+
+                    # display Correct status text in white color
+                    status_text = 'Correct!'
+                    font_for_status = pygame.font.SysFont('Comic Sans MS', 30)
+                    status_surf = font_for_status.render(status_text, False, (0,128,0))
+                    display_surf.blit(status_surf, (0, 1200))
+
                     # clear the previous score by drawing it in black
                     score_surf = font_for_score.render(str(player.score), False, (0, 0, 0))
                     display_surf.blit(score_surf, (1000, 50))
@@ -153,6 +174,21 @@ class Maze:
 
                     pygame.display.flip()
                     break
+                elif user_answer != 'z':
+
+                    # To clear this text display in black
+                    status_text = 'Correct!'
+                    font_for_status = pygame.font.SysFont('Comic Sans MS', 30)
+                    status_surf = font_for_status.render(status_text, False, (0, 0, 0))
+                    display_surf.blit(status_surf, (0, 1200))
+
+                    # display incorrect status text in white color
+                    status_text = 'Incorrect. Please try again'
+                    font_for_status = pygame.font.SysFont('Comic Sans MS', 30)
+                    status_surf = font_for_status.render(status_text, False, (255,0,0))
+                    display_surf.blit(status_surf, (0, 1200))
+                    pygame.display.flip()
+
 
 
 
@@ -164,9 +200,9 @@ class Questions:
     question1 = ['Where was ponyboy coming from when he got jumped by the Socs?' , 'a) Home' , 'b) School' , 'c) The Movies' , 'd) The Park' , 'c']
     question2 = ['What happened to Ponyboy\'s parents?' , 'a) they died in a car accident' , 'b) They abandoned Ponyboy and his brothers' , 'c) They died in a fire' , 'd) They abuse Ponyboy' , 'a']
     question3 = ['Who was Ponyboy\'s oldest brother?' , 'a) Soda Pop' , 'b) Dally', 'c) Johnny' , 'd) Darry' , 'd']
-    question4 = ['Who does Cherry say she could fall in love with?' , 'a) Ponyboy' , 'b) Dally' , 'c)darry' , 'd) Johnny' , 'b']
+    question4 = ['Who does Cherry say she could fall in love with?' , 'a) Ponyboy' , 'b) Dally' , 'c) Darry' , 'd) Johnny' , 'b']
     question5 = ['How did Johnny change after getting jumped by the Socs?' , 'a) He carries a 6-inch switchblade with him everywhere' , 'b)  he scares more easily' , 'c) he never walks alone' , 'd) all of the above' , 'd']
-    question6 = ['What do Cherry and Ponyboy both watch?' , 'a) sunsets' , 'b) video games' , 'c) star wars' , 'the NBA' , 'a']
+    question6 = ['What do Cherry and Ponyboy both watch?' , 'a) sunsets' , 'b) video games' , 'c) star wars' , 'd) the NBA' , 'a']
     question7 = ['Who says that money is not the only thing that separates the Greasers from the Socs?' , 'a) Ponyboy' , 'b) Randy' , 'c) Cherry' , 'd) Marcia' , 'c']
     question8 = ['What does Ponyboy visualize as a fantasy life?' , 'a) life in the country' , 'b) no gangs' , 'c) Parents still alive' , 'd) all of the above' , 'd']
     question9 = ['Why does Ponyboy run out of the house at 2 am?' , 'a) Because Darry slapped him and yelled at him for getting home so late' , 'b) to meet up with Cherry' , 'c) to fight with Bob' , 'd) to fo to a club' , 'a']
@@ -183,7 +219,7 @@ class Questions:
     question20 = ['When Johnnys mother came to visit him at the hospital, what was Johnnys reaction?' , 'a) he was happy to see her' , 'b) he was sleeping' , 'c) he wished his father had come instead' , 'd) he didnt want to see her' , 'd']
     question21 = ['Who was the youngest one at the rumble?' , 'a) Ponyboy' , 'b) Randy' , 'c) Johnny' , 'd) Soda' , 'a']
     question22 = ['Who won the rumble?' , 'a) greasers' , 'b) Socs' , 'c) they didnt end up fighting' , 'd) they both ran away' , 'a']
-    question23 = ['Why did dally and ponyboy go to the hospital after the fight?' , 'a) to see Johnny' , 'b) ' , 'c) ' , 'd) ' , '']
+    question23 = ['Why did dally and ponyboy go to the hospital after the fight?' , 'a) to see Johnny' , 'b) to get medicine' , 'c) because they were hurt' , 'd) to visist Dallys mother' , 'a']
     question24 = ['What news does Pony tell the guys?' , 'a) That Johnny died' , 'b) That Dally was shot' , 'c) That he is going to run away' , 'd) That Darry was killed in the rumble' , 'a']
     question25 = ['How did Dally deal with the death of Johnny?' , 'a) he robbed a store' , 'b) he ran away' , 'c) he broke down crying' , 'd) he killed Randy' , 'a']
     question26 = ['Who came to visit Ponyboy at his house while he was recovering?', 'a) Bob', 'b) Randy', 'c) Johnny', 'd) Two Bit', 'b']
@@ -246,8 +282,9 @@ class App:
         pygame.display.set_caption('Pygame pythonspot.com example')
         self._running = True
         self._coin_surf = pygame.image.load("coin2.png")
-        self._player_surf = pygame.image.load("player.png")
+        self._player_surf = pygame.image.load("mustang2.jpg")
         self._block_surf = pygame.image.load("block.png").convert()
+        self._sunset_surf = pygame.image.load("sunset.jpeg")
 
         pygame.font.init()
 
@@ -261,7 +298,7 @@ class App:
 
     def on_render(self):
         self._display_surf.fill((0, 0, 0))
-        self.maze.draw(self._display_surf, self._block_surf, self._coin_surf, self._player_surf, self.player, self.questions)
+        self.maze.draw(self._sunset_surf, self._display_surf, self._block_surf, self._coin_surf, self._player_surf, self.player, self.questions)
 
     def on_cleanup(self):
         pygame.quit()
